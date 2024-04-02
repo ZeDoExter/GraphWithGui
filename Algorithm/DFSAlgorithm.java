@@ -34,9 +34,6 @@ public class DFSAlgorithm {
     }
 
     public void printConnectivityStatusWithAnimation() {
-        MainGui.textArea.setText("");
-        MainGui.textArea.append("DFS Algorithm started.");
-
         MainGui.sideTextArea.setText("");
         MainGui.sideTextArea.append("DFS Algorithm\n");
         MainGui.sideTextArea.append("In The Processing\n\n");

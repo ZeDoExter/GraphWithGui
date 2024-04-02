@@ -74,7 +74,7 @@ public class DijkstraAlgorithm {
                     Vertex previous = nextVertex.getPrevious();
                     if (previous != null) {
                         for (Edge edge : nextVertex.getEdges()) {
-                            if (edge.getOtherVertex(previous) == nextVertex) {
+                            if (edge.getNeighbor(previous) == nextVertex) {
                                 selectedEdge = edge;
                                 break;
                             }
@@ -121,8 +121,6 @@ public class DijkstraAlgorithm {
                     MainGui.setToStandard();
 
                     MainGui.sideTextArea.append("End of Process\n");
-                    MainGui.textArea.setText("");
-                    MainGui.textArea.append("Minimum Spanning Tree (MST) found.");
                 }
             }
         };
@@ -143,7 +141,7 @@ public class DijkstraAlgorithm {
             }
 
             for (Edge edge : currentVertex.getEdges()) {
-                Vertex neighbor = edge.getOtherVertex(currentVertex);
+                Vertex neighbor = edge.getNeighbor(currentVertex);
                 
                 if (neighbor != null && !visitedMap.get(neighbor)) {
                     int newDistance = currentVertex.getDistance() + edge.getDistance();
@@ -208,10 +206,11 @@ public class DijkstraAlgorithm {
         for (i = 0; i < paths.length - 1; i++) {
             sb.append(paths[i]).append(" -> ");
         }
-        sb.append(paths[i]).append("\n");
+        sb.append(paths[i]);
         
-        MainGui.sideTextArea.append("\n Total distance: " + totalDistance  + "\n");
-        System.out.println(sb.toString());
+        MainGui.sideTextArea.append("\nTotal distance: " + totalDistance  + "\n");
+        MainGui.textArea.setText("");
+        MainGui.textArea.append("Shortest Path is :" + sb.toString());
     }
     
     

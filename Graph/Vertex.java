@@ -88,7 +88,7 @@ public class Vertex {
         } else {
             for (Edge edge : edges) {
                 if (!edge.isVisited()) {
-                    Vertex otherVertex = edge.getOtherVertex(this);
+                    Vertex otherVertex = edge.getNeighbor(this);
                     if (otherVertex != null) {
                         return otherVertex;
                     }

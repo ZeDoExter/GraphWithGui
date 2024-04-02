@@ -53,17 +53,12 @@ public class DrawingPanel extends JPanel {
     }
 
     private void handleMouseClick(MouseEvent e) {
-        if(vertices.isEmpty()){
-            MainGui.setAnimationState(AnimationState.END);
-        } else{
-            MainGui.setAnimationState(AnimationState.IDLE);
-        }
-        if ((MainGui.getAnimationState() == AnimationState.IDLE || MainGui.getAnimationState() == AnimationState.WAITING) && MainGui.getAlgorithmType() != AlgorithmType.NONE) {
+        if (MainGui.getAnimationState() == AnimationState.WAITING && MainGui.getAlgorithmType() != AlgorithmType.NONE) {
             Vertex clickedVertex = findVertex(e.getPoint());
             if (clickedVertex != null) {
                 handleStartVertexSelection(clickedVertex);
             } else {
-                System.out.println("Please select a valid vertex.");
+                MainGui.textArea.append(" Please select a valid vertex.");
             }
         } else {
             if (SwingUtilities.isRightMouseButton(e)) {
@@ -125,7 +120,8 @@ public class DrawingPanel extends JPanel {
     private void handleStartVertexSelection(Vertex clickedVertex) {
 
         if (selectedVertex != null && !selectedVertex.equals(clickedVertex)
-                && MainGui.getAnimationState() == AnimationState.IDLE) {
+                && MainGui.getAnimationState() == AnimationState.IDLE
+                && MainGui.getAlgorithmType() == AlgorithmType.NONE) {
             addEdgeBetweenVertices(selectedVertex, clickedVertex);
             selectedVertex.setSelected(false);
             selectedVertex = null;
@@ -239,8 +235,12 @@ public class DrawingPanel extends JPanel {
             selectedVertex.setSelected(false);
             selectedVertex = null;
         }
-        clickedVertex.setSelected(true);
-        selectedVertex = clickedVertex;
+        if (MainGui.getAnimationState() != AnimationState.RUNNING) {
+            clickedVertex.setSelected(true);
+            selectedVertex = clickedVertex;
+        }
+
+        
     }
 
     private void addEdgeBetweenVertices(Vertex startVertex, Vertex endVertex) {

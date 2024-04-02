@@ -34,9 +34,6 @@ public class BFSAlgorithm {
     }
 
     public void printConnectivityStatusWithAnimation() {
-        MainGui.textArea.setText("");
-        MainGui.textArea.append("DFS Algorithm started.");
-
         MainGui.sideTextArea.setText("");
         MainGui.sideTextArea.append("BFS Algorithm\n");
         MainGui.sideTextArea.append("Processing...\n\n");

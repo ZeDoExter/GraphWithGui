@@ -87,9 +87,9 @@ public class PrimAlgorithm {
 
         drawingPanel.repaint();
 
-        // Timer setup
         Timer timer = new Timer();
         final int[] counter = { 0 };
+
         edgeSelected = false;
 
         TimerTask task = new TimerTask() {
@@ -103,6 +103,7 @@ public class PrimAlgorithm {
                         for (Edge e : mstEdges) {
                             if (e.getDistance() == 0) {
                                 e.setColor(visitedColor);
+                                MainGui.sideTextArea.append(" Found " + e.getName() + " edges (" + edge.getDistance() + ").\n");
                             }
                         }
                         drawingPanel.repaint();
@@ -113,7 +114,6 @@ public class PrimAlgorithm {
                         }
 
                         MainGui.sideTextArea.append("Processing...\n");
-                        MainGui.sideTextArea.append("Found distance 0 edges.\n");
 
                     } else if (edge.getDistance() > 0) {
                         // Highlight ALL edges from visited vertices:
@@ -190,11 +190,12 @@ public class PrimAlgorithm {
 
                     if (edgeSelected) {
                         resetColors(drawingPanel, defaultColor);
-                    }
-                    MainGui.sideTextArea.append("End of Process\n");
+                    }                    
                     MainGui.textArea.setText("");
                     MainGui.textArea.append("Minimum Spanning Tree (MST) found.");
                     printMST(mstEdges);
+                    MainGui.sideTextArea.append("\nEnd of Process");
+
                     MainGui.setToStandard();
                 }
             }
@@ -227,10 +228,10 @@ public class PrimAlgorithm {
     }
 
     private void printMST(List<Edge> mstEdges) {
-        System.out.println("Minimum Spanning Tree (MST):");
+        MainGui.sideTextArea.append("\nMinimum Spanning Tree:\n");
         for (Edge edge : mstEdges) {
-            System.out.println(edge.getStartVertex().getName() + " -> " + edge.getName() + " (" + edge.getDistance()
-                    + ") -> " + edge.getEndVertex().getName());
+            MainGui.sideTextArea.append(edge.getStartVertex().getName() + " -> " + edge.getName() + " (" + edge.getDistance()
+                    + ") -> " + edge.getEndVertex().getName() + "\n");
         }
     }
 

@@ -87,6 +87,7 @@ public class KruskalAlgorithm {
                     if (counter[0] == 0 && edge.getDistance() == 0) {
                         for (Edge e : mstEdges) {
                             if (e.getDistance() == 0) {
+                                MainGui.sideTextArea.append(" Found " + e.getName() + " edges (" + edge.getDistance() + ").\n");
                                 e.setColor(visitedColor);
                             }
                         }
@@ -98,7 +99,6 @@ public class KruskalAlgorithm {
                         }
 
                         MainGui.sideTextArea.append("Processing...\n\n");
-                        MainGui.sideTextArea.append("Found distance 0 edges, highlighting in green.\n");
 
                     } else if (edge.getDistance() > 0) {
                         List<Edge> candidates = findEdgesWithSameDistance(mstEdges, counter[0]);
@@ -173,7 +173,7 @@ public class KruskalAlgorithm {
             }
         };
 
-        timer.schedule(task, 0, animationDelay);
+        timer.schedule(task, 0, animationDelay * 2);
     }
 
     private List<Edge> findEdgesWithSameDistance(List<Edge> mstEdges, int index) {

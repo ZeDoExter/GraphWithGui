@@ -18,7 +18,7 @@ public class ButtonEvent{
     }
 
     public static void startBFSAlgorithm() {
-        if((MainGui.getAnimationState() == AnimationState.IDLE)){
+        if((MainGui.getAnimationState() == AnimationState.IDLE && !drawingPanel.getVertices().isEmpty())){
             MainGui.setAnimationState(AnimationState.WAITING);
             MainGui.setAlgorithmType(AlgorithmType.BFS);
             MainGui.textArea.setText("");
@@ -27,7 +27,7 @@ public class ButtonEvent{
     }
 
     public static void startDFSAlgorithm() {
-        if(MainGui.getAnimationState() == AnimationState.IDLE){
+        if(MainGui.getAnimationState() == AnimationState.IDLE && !drawingPanel.getVertices().isEmpty()){
             MainGui.setAnimationState(AnimationState.WAITING);
             MainGui.setAlgorithmType(AlgorithmType.DFS);
             MainGui.textArea.setText("");
@@ -37,18 +37,19 @@ public class ButtonEvent{
     }
 
     public static void handleKruskalButtonClick() {
+        if(MainGui.getAnimationState() == AnimationState.IDLE && !drawingPanel.getVertices().isEmpty()){
+        MainGui.sideTextArea.setText("");
         MainGui.sideTextArea.append("Kruskal's Algorithm started.");
         MainGui.setAnimationState(AnimationState.RUNNING);
         KruskalAlgorithm kAlgorithm = new KruskalAlgorithm(drawingPanel, animationDelay);
         kAlgorithm.findMSTWithAnimation();
+        }
     }
 
     public static void handlePrimButtonClick() {
-        MainGui.sideTextArea.append("Prim's Algorithm started.");
-        if(MainGui.getAnimationState() == AnimationState.WAITING){
+        if(MainGui.getAnimationState() == AnimationState.IDLE && !drawingPanel.getVertices().isEmpty()){
             MainGui.setAnimationState(AnimationState.WAITING);
             MainGui.setAlgorithmType(AlgorithmType.PRIM);
-            MainGui.setAnimationState(AnimationState.RUNNING);
             MainGui.textArea.setText("");
             MainGui.textArea.setText(MainGui.textArea.getText() + "Select a vertex to start Prim's Algorithm.");
         }
@@ -56,11 +57,9 @@ public class ButtonEvent{
     }
 
     public static void handleDijkstraButtonClick() {
-        MainGui.sideTextArea.append("Dijkstra's Algorithm started.");
-        if(MainGui.getAnimationState() == AnimationState.WAITING){
+        if(MainGui.getAnimationState() == AnimationState.IDLE && !drawingPanel.getVertices().isEmpty()){
             MainGui.setAnimationState(AnimationState.WAITING);
             MainGui.setAlgorithmType(AlgorithmType.DIJKSTRA);
-            MainGui.setAnimationState(AnimationState.RUNNING);
             MainGui.textArea.setText("");
             MainGui.textArea.setText(MainGui.textArea.getText() + "Select a vertex to start Dijkstra's Algorithm.");
         }

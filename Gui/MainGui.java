@@ -56,7 +56,7 @@ public class MainGui {
 
         textArea = new JTextArea("Click anywhere on this empty space to create a vertex.");
 
-        slider = new JSlider(JSlider.HORIZONTAL, 500, 3000, 500);
+        slider = new JSlider(JSlider.HORIZONTAL, 100, 1000, 500);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
@@ -83,6 +83,8 @@ public class MainGui {
 
         bfsButton.addActionListener(e -> buttonEvent.startBFSAlgorithm());
         dfsButton.addActionListener(e -> buttonEvent.startDFSAlgorithm());
+        // dfsButton.addActionListener(e -> System.out.println(MainGui.getAnimationState() + " " + MainGui.getAlgorithmType()));
+        // resetButton.addActionListener(e -> System.out.println(MainGui.getAnimationState() + " " + MainGui.getAlgorithmType()));
         resetButton.addActionListener(e -> drawingPanel.reset());
 
         frame.setVisible(true);

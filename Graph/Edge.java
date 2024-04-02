@@ -40,8 +40,8 @@ public class Edge {
         g.setColor(color);
         g.drawLine(startVertex.getX(), startVertex.getY(), endVertex.getX(), endVertex.getY());
 
-        int midX = ((startVertex.getX() + endVertex.getX()) / 2) - 10;
-        int midY = ((startVertex.getY() + endVertex.getY()) / 2) + 10;
+        int midX = ((startVertex.getX() + endVertex.getX()) / 2) - 20;
+        int midY = ((startVertex.getY() + endVertex.getY()) / 2) + 20;
 
         String label = getName() + "(" + getDistance() + ")";
         g.drawString(label, midX, midY);
@@ -85,16 +85,6 @@ public class Edge {
 
     public void setVisited(boolean visited) {
         this.visited = visited;
-    }
-
-    public Vertex getOtherVertex(Vertex vertex) {
-        if (vertex.equals(startVertex)) {
-            return endVertex;
-        } else if (vertex.equals(endVertex)) {
-            return startVertex;
-        } else {
-            return null;
-        }
     }
 
 }
